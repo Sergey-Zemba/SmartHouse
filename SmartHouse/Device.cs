@@ -8,21 +8,37 @@ namespace SmartHouse
 {
     abstract class Device : ISwitchable
     {
-    {
-        public SwitchState State { get; set; }
+        private SwitchState switchState;
+        public SwitchState SwitchState
+        {
+            get
+            {
+                return switchState;
+            }
 
+        }
         public Device()
         {
 
         }
         public void On()
         {
-            State = SwitchState.On;
+            switchState = SwitchState.On;
         }
 
         public void Off()
         {
-            State = SwitchState.Off;
+            switchState = SwitchState.Off;
+        }
+
+        public override string ToString()
+        {
+            string str = this.GetType().Name + " is " + SwitchState;
+            if (this is IOpenable)
+            {
+                str += " and " + (this as IOpenable).OpenState;
+            }
+            return str;
         }
     }
 }

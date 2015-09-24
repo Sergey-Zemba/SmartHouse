@@ -8,6 +8,7 @@ namespace SmartHouse
 {
     interface ISwitchable
     {
+        SwitchState SwitchState { get; }
         void On();
         void Off();
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    class Fridge : Device, IOpenable
+    class Garage:Device, IOpenable
     {
         private OpenState openState;
         public OpenState OpenState
@@ -15,16 +15,16 @@ namespace SmartHouse
             {
                 return openState;
             }
-            
+
         }
 
         public void Open()
         {
-            
+
             openState = OpenState.Open;
-            if (FridgeOpened != null)
+            if (GarageOpened != null)
             {
-                FridgeOpened("You forget to close your fridge");
+                GarageOpened("You forget to close your garage");
             }
         }
 
@@ -32,9 +32,9 @@ namespace SmartHouse
         {
             openState = OpenState.Close;
         }
-        public delegate void FridgeDelegate(string msg);
+        public delegate void GarageDelegate(string msg);
 
-        public event FridgeDelegate FridgeOpened;
+        public event GarageDelegate GarageOpened;
 
     }
 }

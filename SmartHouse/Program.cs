@@ -10,7 +10,8 @@ namespace SmartHouse
     {
         static void Main(string[] args)
         {
-
+            Management manager = new Management();
+            manager.Start();
         }
     }
 }

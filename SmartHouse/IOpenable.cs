@@ -8,8 +8,10 @@ namespace SmartHouse
 {
     interface IOpenable
     {
+        OpenState OpenState { get;  }
         void Open();
         void Close();
+
 
     }
 }
