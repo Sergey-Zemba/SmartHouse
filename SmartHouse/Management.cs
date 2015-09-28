@@ -28,7 +28,7 @@ namespace SmartHouse
                     }
                 }
                 Console.WriteLine();
-                Console.WriteLine("Enter the command: ");
+                Console.WriteLine("Type in the command or press <Enter> for help: ");
                 string[] commands = Console.ReadLine().ToLower().Split(' ');
 
                 if (commands.Length != 3 && commands.Length != 2 & commands.Length != 1)
@@ -274,6 +274,7 @@ namespace SmartHouse
             Console.ReadLine();
             
         }
+        
 
     }
 }

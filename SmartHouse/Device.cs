@@ -21,12 +21,12 @@ namespace SmartHouse
         {
 
         }
-        public void On()
+        public virtual void On()
         {
             switchState = SwitchState.On;
         }
 
-        public void Off()
+        public virtual void Off()
         {
             switchState = SwitchState.Off;
         }

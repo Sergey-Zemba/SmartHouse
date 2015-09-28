@@ -22,19 +22,13 @@ namespace SmartHouse
         {
             
             openState = OpenState.Open;
-            if (FridgeOpened != null)
-            {
-                FridgeOpened("You forget to close your fridge");
-            }
+            
         }
 
         public void Close()
         {
             openState = OpenState.Close;
         }
-        public delegate void FridgeDelegate(string msg);
-
-        public event FridgeDelegate FridgeOpened;
 
     }
 }
