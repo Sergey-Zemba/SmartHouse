@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    interface IOpenable
+    interface IVolumeable
     {
-        OpenState OpenState { get; }
-        void Open();
-        void Close();
-
-
+        void AddVolume();
+        void DecreaseVolume();
+        void Mute();
     }
 }

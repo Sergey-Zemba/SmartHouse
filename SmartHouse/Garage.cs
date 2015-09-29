@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    class Garage:Device, IOpenable
+    class Garage : Device, IOpenable
     {
         private OpenState openState;
         public OpenState OpenState

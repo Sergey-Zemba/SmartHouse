@@ -10,6 +10,7 @@ namespace SmartHouse
 {
     internal class Management
     {
+        private StereoSystemFactory factory;
         IDictionary<string, Device> devices = new Dictionary<string, Device>();
         public void Start()
         {
@@ -36,7 +37,7 @@ namespace SmartHouse
                     Help();
                     continue;
                 }
-                
+
                 switch (commands[0])
                 {
                     case "add":
@@ -45,37 +46,70 @@ namespace SmartHouse
                             Help();
                             continue;
                         }
+                        if (commands[1].Contains("samsung"))
+                        {
+                            factory = new SamsungFactory();
+                        }
+                        if (commands[1].Contains("panasonic"))
+                        {
+                            factory = new PanasonicFactory();
+                        }
                         if (!devices.ContainsKey(commands[2]))
                         {
                             if (commands[1] == "fridge")
                             {
                                 Fridge f = new Fridge();
                                 devices.Add(commands[2], f);
-                                
+
                             }
                             else if (commands[1] == "garage")
                             {
                                 Garage g = new Garage();
                                 devices.Add(commands[2], g);
-                                
+
                             }
                             else if (commands[1] == "camera")
                             {
                                 Camera c = new Camera();
                                 devices.Add(commands[2], c);
-                                
+
                             }
                             else if (commands[1] == "airconditioner")
                             {
                                 AirConditioner a = new AirConditioner();
                                 devices.Add(commands[2], a);
-                                
+
                             }
                             else if (commands[1] == "tv")
                             {
                                 TV t = new TV();
                                 devices.Add(commands[2], t);
-                                
+
+                            }
+                            else if (commands[1] == "samsungstereo")
+                            {
+
+                                SamsungStereoSystem s = (SamsungStereoSystem)factory.MakeStereoSystem();
+                                devices.Add(commands[2], s);
+
+                            }
+                            else if (commands[1] == "panasonicstereo")
+                            {
+                                PanasonicStereoSystem p = (PanasonicStereoSystem)factory.MakeStereoSystem();
+                                devices.Add(commands[2], p);
+
+                            }
+                            else if (commands[1] == "samsungspeakers")
+                            {
+                                SamsungLoudspeakers sl = (SamsungLoudspeakers)factory.MakeLoudspeakers();
+                                devices.Add(commands[2], sl);
+
+                            }
+                            else if (commands[1] == "panasonicspeakers")
+                            {
+                                PanasonicLoudspeakers pl = (PanasonicLoudspeakers)factory.MakeLoudspeakers();
+                                devices.Add(commands[2], pl);
+
                             }
                             else
                             {
@@ -92,7 +126,7 @@ namespace SmartHouse
                             Console.WriteLine("Device with name \'{0}\' already exists. " +
                                               "Press <Enter> to continue", commands[2]);
                             Console.ReadLine();
-                            
+
                         }
                         break;
                     case "del":
@@ -160,7 +194,7 @@ namespace SmartHouse
                                 if (device.Value is IOpenable)
                                 {
                                     (device.Value as IOpenable).Open();
-                                } 
+                                }
                             }
                         }
                         if (isValid(commands[1]) && commands[1] != "all")
@@ -174,7 +208,7 @@ namespace SmartHouse
                                 Console.WriteLine("You can't apply command \'open\' to {0} {1}. " +
                                                   "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
                                 Console.ReadLine();
-                                
+
                             }
                         }
                         break;
@@ -205,7 +239,100 @@ namespace SmartHouse
                                 Console.WriteLine("You can't apply command \'close\' to {0} {1}. " +
                                                   "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
                                 Console.ReadLine();
-                                
+
+                            }
+                        }
+                        break;
+                    case "addvolume":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IVolumeable)
+                                {
+                                    (device.Value as IVolumeable).AddVolume();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IVolumeable)
+                            {
+                                (devices[commands[1]] as IVolumeable).AddVolume();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'addvolume\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "decvolume":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IVolumeable)
+                                {
+                                    (device.Value as IVolumeable).DecreaseVolume();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IVolumeable)
+                            {
+                                (devices[commands[1]] as IVolumeable).DecreaseVolume();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'decvolume\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "mute":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IVolumeable)
+                                {
+                                    (device.Value as IVolumeable).Mute();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IVolumeable)
+                            {
+                                (devices[commands[1]] as IVolumeable).Mute();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'mute\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
                             }
                         }
                         break;
@@ -238,10 +365,10 @@ namespace SmartHouse
                 Console.WriteLine("You don't have device with name \'{0}\'. " +
                                    "Press <Enter> to continue", key);
                 Console.ReadLine();
-                
+
                 return false;
             }
-            
+
             else
             {
                 return true;
@@ -257,11 +384,17 @@ namespace SmartHouse
             Console.WriteLine("\toff name");
             Console.WriteLine("\topen name");
             Console.WriteLine("\tclose name");
+            Console.WriteLine("\taddvolume name");
+            Console.WriteLine("\tdecvolume name");
+            Console.WriteLine("\tmute name");
             Console.WriteLine("\tdel all");
             Console.WriteLine("\ton all");
             Console.WriteLine("\toff all");
             Console.WriteLine("\topen all");
             Console.WriteLine("\tclose all");
+            Console.WriteLine("\taddvolume all");
+            Console.WriteLine("\tdecvolume all");
+            Console.WriteLine("\tmute all");
             Console.WriteLine("\texit");
             Console.WriteLine();
             Console.WriteLine("Availavle devices:");
@@ -270,11 +403,15 @@ namespace SmartHouse
             Console.WriteLine("\tfridge");
             Console.WriteLine("\tgarage");
             Console.WriteLine("\ttv");
+            Console.WriteLine("\tsamsungstereo");
+            Console.WriteLine("\tpanasonicstereo");
+            Console.WriteLine("\tsamsungspeakers");
+            Console.WriteLine("\tpanasonicspeakers");
             Console.WriteLine("Press <Enter> to continue");
             Console.ReadLine();
-            
+
         }
-        
+
 
     }
 }

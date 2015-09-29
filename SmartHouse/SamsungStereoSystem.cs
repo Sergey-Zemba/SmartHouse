@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    interface IOpenable
+    class SamsungStereoSystem : StereoSystem
     {
-        OpenState OpenState { get; }
-        void Open();
-        void Close();
+        public SamsungStereoSystem()
+        {
 
-
+        }
     }
 }

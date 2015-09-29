@@ -15,14 +15,14 @@ namespace SmartHouse
             {
                 return openState;
             }
-            
+
         }
 
         public void Open()
         {
-            
+
             openState = OpenState.Open;
-            
+
         }
 
         public void Close()

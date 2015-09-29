@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    interface IOpenable
+    class PanasonicStereoSystem : StereoSystem
     {
-        OpenState OpenState { get; }
-        void Open();
-        void Close();
+        public PanasonicStereoSystem()
+        {
 
-
+        }
     }
 }

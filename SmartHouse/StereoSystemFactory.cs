@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    interface IOpenable
+    abstract class StereoSystemFactory
     {
-        OpenState OpenState { get; }
-        void Open();
-        void Close();
-
+        public abstract StereoSystem MakeStereoSystem();
+        public abstract Loudspeakers MakeLoudspeakers();
 
     }
 }
