@@ -8,9 +8,6 @@ namespace SmartHouse
 {
     class PanasonicStereoSystem : StereoSystem
     {
-        public PanasonicStereoSystem()
-        {
-
-        }
+        
     }
 }

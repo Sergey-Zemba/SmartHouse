@@ -8,5 +8,6 @@ namespace SmartHouse
 {
     class PanasonicLoudspeakers : Loudspeakers
     {
+
     }
 }
