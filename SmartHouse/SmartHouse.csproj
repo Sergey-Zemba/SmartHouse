@@ -46,6 +46,7 @@
     <Compile Include="Devices\Device.cs" />
     <Compile Include="Devices\Fridge.cs" />
     <Compile Include="Devices\Garage.cs" />
+    <Compile Include="Interfaces\IBass.cs" />
     <Compile Include="Interfaces\IOpenable.cs" />
     <Compile Include="Interfaces\IRecording.cs" />
     <Compile Include="Interfaces\ISwitchable.cs" />
@@ -54,16 +55,11 @@
     <Compile Include="Devices\Loudspeakers.cs" />
     <Compile Include="Management.cs" />
     <Compile Include="States\OpenState.cs" />
-    <Compile Include="Factories\PanasonicFactory.cs" />
     <Compile Include="Devices\PanasonicLoudspeakers.cs" />
     <Compile Include="Devices\PanasonicStereoSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Factories\SamsungFactory.cs" />
-    <Compile Include="Devices\SamsungLoudspeakers.cs" />
-    <Compile Include="Devices\SamsungStereoSystem.cs" />
     <Compile Include="Devices\StereoSystem.cs" />
-    <Compile Include="Factories\DeviceFactory.cs" />
     <Compile Include="States\RecordMode.cs" />
     <Compile Include="States\SwitchState.cs" />
     <Compile Include="Devices\TV.cs" />

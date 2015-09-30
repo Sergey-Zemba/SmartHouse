@@ -5,13 +5,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.Devices;
 using SmartHouse.Interfaces;
 
 namespace SmartHouse
 {
     internal class Management
     {
-        private DeviceFactory factory;
         IDictionary<string, Device> devices = new Dictionary<string, Device>();
         public void Start()
         {
@@ -47,14 +47,6 @@ namespace SmartHouse
                             Help();
                             continue;
                         }
-                        if (commands[1].Contains("samsung"))
-                        {
-                            factory = new SamsungFactory();
-                        }
-                        if (commands[1].Contains("panasonic"))
-                        {
-                            factory = new PanasonicFactory();
-                        }
                         if (!devices.ContainsKey(commands[2]))
                         {
                             if (commands[1] == "fridge")
@@ -87,28 +79,17 @@ namespace SmartHouse
                                 devices.Add(commands[2], t);
 
                             }
-                            else if (commands[1] == "samsungstereo")
-                            {
-
-                                SamsungStereoSystem s = (SamsungStereoSystem)factory.MakeStereoSystem();
-                                devices.Add(commands[2], s);
-
-                            }
+                            
                             else if (commands[1] == "panasonicstereo")
                             {
-                                PanasonicStereoSystem p = (PanasonicStereoSystem)factory.MakeStereoSystem();
+                                PanasonicStereoSystem p = new PanasonicStereoSystem(new PanasonicLoudspeakers());
                                 devices.Add(commands[2], p);
 
                             }
-                            else if (commands[1] == "samsungspeakers")
-                            {
-                                SamsungLoudspeakers sl = (SamsungLoudspeakers)factory.MakeLoudspeakers();
-                                devices.Add(commands[2], sl);
-
-                            }
+                            
                             else if (commands[1] == "panasonicspeakers")
                             {
-                                PanasonicLoudspeakers pl = (PanasonicLoudspeakers)factory.MakeLoudspeakers();
+                                PanasonicLoudspeakers pl = new PanasonicLoudspeakers();
                                 devices.Add(commands[2], pl);
 
                             }
@@ -461,6 +442,68 @@ namespace SmartHouse
                             }
                         }
                         break;
+                    case "addbass":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IBass)
+                                {
+                                    (device.Value as IBass).BassOn();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IBass)
+                            {
+                                (devices[commands[1]] as IBass).BassOn();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'addbass\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "delbass":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IBass)
+                                {
+                                    (device.Value as IBass).BassOff();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IBass)
+                            {
+                                (devices[commands[1]] as IBass).BassOff();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'delbass\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
                     case "exit":
                         if (commands.Length != 1)
                         {
@@ -516,6 +559,8 @@ namespace SmartHouse
             Console.WriteLine("\tstoprec name");
             Console.WriteLine("\taddtemp name");
             Console.WriteLine("\tdectemp name");
+            Console.WriteLine("\taddbass name");
+            Console.WriteLine("\tdelbass name");
             Console.WriteLine("\tdel all");
             Console.WriteLine("\ton all");
             Console.WriteLine("\toff all");
@@ -528,6 +573,8 @@ namespace SmartHouse
             Console.WriteLine("\tstoprec all");
             Console.WriteLine("\taddtemp all");
             Console.WriteLine("\tdectemp all");
+            Console.WriteLine("\taddbass all");
+            Console.WriteLine("\tdelbass all");
             Console.WriteLine("\texit");
             Console.WriteLine();
             Console.WriteLine("Available devices:");
@@ -536,9 +583,7 @@ namespace SmartHouse
             Console.WriteLine("\tfridge");
             Console.WriteLine("\tgarage");
             Console.WriteLine("\ttv");
-            Console.WriteLine("\tsamsungstereo");
             Console.WriteLine("\tpanasonicstereo");
-            Console.WriteLine("\tsamsungspeakers");
             Console.WriteLine("\tpanasonicspeakers");
             Console.WriteLine("Press <Enter> to continue");
             Console.ReadLine();

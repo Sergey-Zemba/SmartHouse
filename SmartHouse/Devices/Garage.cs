@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.Interfaces;
+using SmartHouse.States;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
     class Garage : Device, IOpenable
     {

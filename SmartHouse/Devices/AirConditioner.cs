@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SmartHouse.Interfaces;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
     class AirConditioner : Device, ITemperature
     {

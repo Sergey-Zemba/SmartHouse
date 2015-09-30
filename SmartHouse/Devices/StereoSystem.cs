@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.Interfaces;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
     abstract class StereoSystem : Device, IVolumeable
     {
+        public StereoSystem(Loudspeakers loudspeakers)
+        {
+            Loudspeakers = loudspeakers;
+        }
         public Loudspeakers Loudspeakers { get; set; }
 
         public virtual void AddVolume()

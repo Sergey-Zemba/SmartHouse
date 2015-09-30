@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse
+namespace SmartHouse.Interfaces
 {
-    class SamsungStereoSystem : StereoSystem
+    interface IBass
     {
-        public SamsungStereoSystem()
-        {
-
-        }
+        void BassOn();
+        void BassOff();
     }
 }

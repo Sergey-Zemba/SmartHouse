@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.Interfaces;
+using SmartHouse.States;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
     abstract class Device : ISwitchable
     {
@@ -17,10 +19,7 @@ namespace SmartHouse
             }
 
         }
-        public Device()
-        {
-
-        }
+        
         public virtual void On()
         {
             switchState = SwitchState.On;

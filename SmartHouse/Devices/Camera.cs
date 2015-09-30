@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SmartHouse.Interfaces;
 using SmartHouse.States;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
     class Camera : Device, IRecording
     {
