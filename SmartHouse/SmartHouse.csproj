@@ -41,33 +41,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AirConditioner.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="Device.cs" />
-    <Compile Include="Fridge.cs" />
-    <Compile Include="Garage.cs" />
-    <Compile Include="IOpenable.cs" />
-    <Compile Include="ISwitchable.cs" />
-    <Compile Include="IVolumeable.cs" />
-    <Compile Include="Loudspeakers.cs" />
+    <Compile Include="Devices\AirConditioner.cs" />
+    <Compile Include="Devices\Camera.cs" />
+    <Compile Include="Devices\Device.cs" />
+    <Compile Include="Devices\Fridge.cs" />
+    <Compile Include="Devices\Garage.cs" />
+    <Compile Include="Interfaces\IRecording.cs" />
+    <Compile Include="Interfaces\IOpenable.cs" />
+    <Compile Include="Interfaces\ISwitchable.cs" />
+    <Compile Include="Interfaces\ITemperature.cs" />
+    <Compile Include="Interfaces\IVolumeable.cs" />
+    <Compile Include="Devices\Loudspeakers.cs" />
     <Compile Include="Management.cs" />
-    <Compile Include="OpenState.cs" />
-    <Compile Include="PanasonicFactory.cs" />
-    <Compile Include="PanasonicLoudspeakers.cs" />
-    <Compile Include="PanasonicStereoSystem.cs" />
+    <Compile Include="States\OpenState.cs" />
+    <Compile Include="Factories\PanasonicFactory.cs" />
+    <Compile Include="Devices\PanasonicLoudspeakers.cs" />
+    <Compile Include="Devices\PanasonicStereoSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SamsungFactory.cs" />
-    <Compile Include="SamsungLoudspeakers.cs" />
-    <Compile Include="SamsungStereoSystem.cs" />
-    <Compile Include="StereoSystem.cs" />
-    <Compile Include="StereoSystemFactory.cs" />
-    <Compile Include="SwitchState.cs" />
-    <Compile Include="TV.cs" />
+    <Compile Include="Factories\SamsungFactory.cs" />
+    <Compile Include="Devices\SamsungLoudspeakers.cs" />
+    <Compile Include="Devices\SamsungStereoSystem.cs" />
+    <Compile Include="Devices\StereoSystem.cs" />
+    <Compile Include="Factories\DeviceFactory.cs" />
+    <Compile Include="States\RecordMode.cs" />
+    <Compile Include="States\SwitchState.cs" />
+    <Compile Include="Devices\TV.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,16 +9,13 @@ namespace SmartHouse
     abstract class Device : ISwitchable
     {
         private SwitchState switchState;
+
         public SwitchState SwitchState
         {
             get
             {
                 return switchState;
             }
-
-        }
-        public Device()
-        {
 
         }
         public virtual void On()

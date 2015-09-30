@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    class SamsungLoudspeakers : Loudspeakers
+    abstract class DeviceFactory
     {
+        public abstract StereoSystem MakeStereoSystem();
+        public abstract Loudspeakers MakeLoudspeakers();
+
     }
 }

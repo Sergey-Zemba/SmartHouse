@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse
+namespace SmartHouse.Devices
 {
-    class AirConditioner : Device
+    interface IRecording
     {
+        void StartRecording();
+        void StopRecording();
     }
 }

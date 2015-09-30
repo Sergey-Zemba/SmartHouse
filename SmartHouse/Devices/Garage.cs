@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    class Fridge : Device, IOpenable
+    class Garage : Device, IOpenable
     {
         private OpenState openState;
         public OpenState OpenState
@@ -22,13 +22,13 @@ namespace SmartHouse
         {
 
             openState = OpenState.Open;
-
+           
         }
 
         public void Close()
         {
             openState = OpenState.Close;
         }
-
+        
     }
 }
