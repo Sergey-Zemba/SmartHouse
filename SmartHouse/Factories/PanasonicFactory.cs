@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    class SamsungFactory : StereoSystemFactory
+    class PanasonicFactory : DeviceFactory
     {
 
         public override StereoSystem MakeStereoSystem()
         {
-            SamsungStereoSystem s = new SamsungStereoSystem();
-            s.Loudspeakers = MakeLoudspeakers();
-            return s;
+            PanasonicStereoSystem p = new PanasonicStereoSystem();
+            p.Loudspeakers = MakeLoudspeakers();
+            return p;
         }
 
         public override Loudspeakers MakeLoudspeakers()
         {
-            return new SamsungLoudspeakers();
+            return new PanasonicLoudspeakers();
         }
     }
 }

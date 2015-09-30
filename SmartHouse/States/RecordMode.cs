@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse
+namespace SmartHouse.States
 {
-    class TV : Device
+    enum RecordMode
     {
+        Record,
+        Live
     }
 }

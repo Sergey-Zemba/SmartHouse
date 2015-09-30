@@ -5,12 +5,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.Interfaces;
 
 namespace SmartHouse
 {
     internal class Management
     {
-        private StereoSystemFactory factory;
+        private DeviceFactory factory;
         IDictionary<string, Device> devices = new Dictionary<string, Device>();
         public void Start()
         {
@@ -336,6 +337,130 @@ namespace SmartHouse
                             }
                         }
                         break;
+                    case "startrec":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IRecording)
+                                {
+                                    (device.Value as IRecording).StartRecording();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IRecording)
+                            {
+                                (devices[commands[1]] as IRecording).StartRecording();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'startrec\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "stoprec":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is IRecording)
+                                {
+                                    (device.Value as IRecording).StopRecording();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is IRecording)
+                            {
+                                (devices[commands[1]] as IRecording).StopRecording();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'stoprec\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "addtemp":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is ITemperature)
+                                {
+                                    (device.Value as ITemperature).AddTemperture();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is ITemperature)
+                            {
+                                (devices[commands[1]] as ITemperature).AddTemperture();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'addtemp\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
+                    case "dectemp":
+                        if (commands.Length != 2)
+                        {
+                            Help();
+                            continue;
+                        }
+                        if (commands[1] == "all")
+                        {
+                            foreach (var device in devices)
+                            {
+                                if (device.Value is ITemperature)
+                                {
+                                    (device.Value as ITemperature).DecreaseTemperature();
+                                }
+                            }
+                        }
+                        if (isValid(commands[1]) && commands[1] != "all")
+                        {
+                            if (devices[commands[1]] is ITemperature)
+                            {
+                                (devices[commands[1]] as ITemperature).DecreaseTemperature();
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't apply command \'dectemp\' to {0} {1}. " +
+                                                  "Press <Enter> to continue", devices[commands[1]].GetType().Name, commands[1]);
+                                Console.ReadLine();
+
+                            }
+                        }
+                        break;
                     case "exit":
                         if (commands.Length != 1)
                         {
@@ -387,6 +512,10 @@ namespace SmartHouse
             Console.WriteLine("\taddvolume name");
             Console.WriteLine("\tdecvolume name");
             Console.WriteLine("\tmute name");
+            Console.WriteLine("\tstartrec name");
+            Console.WriteLine("\tstoprec name");
+            Console.WriteLine("\taddtemp name");
+            Console.WriteLine("\tdectemp name");
             Console.WriteLine("\tdel all");
             Console.WriteLine("\ton all");
             Console.WriteLine("\toff all");
@@ -395,9 +524,13 @@ namespace SmartHouse
             Console.WriteLine("\taddvolume all");
             Console.WriteLine("\tdecvolume all");
             Console.WriteLine("\tmute all");
+            Console.WriteLine("\tstartrec all");
+            Console.WriteLine("\tstoprec all");
+            Console.WriteLine("\taddtemp all");
+            Console.WriteLine("\tdectemp all");
             Console.WriteLine("\texit");
             Console.WriteLine();
-            Console.WriteLine("Availavle devices:");
+            Console.WriteLine("Available devices:");
             Console.WriteLine("\tairconditioner");
             Console.WriteLine("\tcamera");
             Console.WriteLine("\tfridge");

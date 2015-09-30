@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse
+namespace SmartHouse.Interfaces
 {
-    class Camera : Device
+    interface ITemperature
     {
+        void AddTemperture();
+        void DecreaseTemperature();
     }
 }

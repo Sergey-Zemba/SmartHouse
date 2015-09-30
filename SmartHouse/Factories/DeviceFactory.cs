@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse
 {
-    abstract class StereoSystemFactory
+    abstract class DeviceFactory
     {
         public abstract StereoSystem MakeStereoSystem();
         public abstract Loudspeakers MakeLoudspeakers();
